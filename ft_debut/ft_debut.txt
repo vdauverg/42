@@ -1,0 +1,73 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ft_debut.txt                                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/03/06 10:54:53 by vdauverg          #+#    #+#              #
+#    Updated: 2019/03/07 17:04:20 by vdauverg         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+1. In the most concise way possible, answer this question, what is 42? How would you describe 42 to someone who doesn’t know what 42 is?
+
+42 is a free coding school, mostly funded by a very successful French entrepreneur, most known for his telephone network, "Free".
+It is unique in the fact that there are no lecturers nor lessons, however all courses are available online throught the school's intranet. This means work is done at each individual's own learning pace, also leaving time for side projects and attending the many events and various opportunities that the school provides access to.
+
+
+2. Why are there no instructions on the initial 42 logic tests?
+
+There are several reasons for this.
+Mainly, it is to test your logic and problem-soving abilities in a code-based setting. It also gives a taste of what the rest of 42 will be like, where being able to figure out issues of your own accord in a very similar way is crucial.
+Often-times I have spent longer trying to understand the question than I have actually coding.
+
+
+3. What are the core 42 principles?
+
+Pursuit of excellence, innovation and curiosity, creativity and passion, commitment to the community, belief in open opportunity to all through equality, diversity and inclusion.
+
+
+4. If somebody is thinking of going to 42, but has no coding experience - do you really think it’s worth their time?
+
+Absolutely, yes. The whole concept of the school is based around taking in anyone with the will to learn, no matter their background, and turn them into coders.
+One thing to keep in mind, however is that many of the people who enter this school do indeed have previous experience in other languages, and typically get jobs later on in those various languages, using the school only as a platform to launch themselves, as well as improve their knowledge and portfolio of the usually more complex low-level programming.
+
+
+5. What makes 42 unique?
+
+The fact that the whole studnt ecosystem is self-sufficient withoit having any teachers or real lesson organisers is in and of itself unique. On top of this, the mindset and ambience of this school is very open and free, as many people come here to make important contacs and network professionally, or even non-professionally.
+
+
+6. What do you think you’re learning the most at 42?
+
+The obvious response lies in coding, however I have - and continue to learn a lot about business and what it's like do things such as starting a company or working ith partners and companies.
+
+
+7. Imagine (this will happen very soon in real life!), you’ve been stuck on the problem for a while and have no idea what to do - what your next steps would be?
+
+Talking to others, whether they have or haven't comleted this project yet is a good start, as a fresh set of eyes can often see some small details that you missed repeatedly. The trap lies in expecting a certain result from your code, and skipping over certain details due to this biased mindset.
+If i still have issues with complting the project after this, I would continue with extensive internet research.
+If worst comes to worst, I would take a break from the project for a day or 2, focusing on maybe another project or learning other languages etc.
+
+
+8. How will you ensure that your personal level of motivation remains high on a daily basis to complete at least 1 level per month without the Piscine pressure and strict deadlines?
+
+Having a routine is very important, as it keeps your goals clear and also keeps your day structured with clear tasks. it also allows you to feel more satisfied and refreshed when you allow yourself to break the schedule for breaks between projects. This means that I can get my morale bavk up properly before commencing another project.
+
+
+9. If someone asks you why it says internships are required on the 42 website, but they do not offer job placement, what would you say?
+
+Internships do not necessarilym lead to getting the sme job permanently. This depends on performance and the comapnies wishes.
+
+
+10. How do the internships work? Is it mandatory that you have to reach a certain level before leaving on an internship or can you validate it anytime you find one?
+
+In order to apply for internships, you must have reached at least level 7. This weeds out any inadequate candidates for internships, encouraging companies to trust 42in providing good candidates.
+
+
+11. How does 42 help you adapt to a work place?
+
+It is quite famous within local job finding circles, and many copanies come in to give conferences/talks, where students can take the opportunity to network and make contacts. Most of the help comes from the school's reputation.
+Additionally, the various projects that you complete over your time spent in 42 allow you to grow your knowledge and prepare for certain job positions in a structured and secure manner.

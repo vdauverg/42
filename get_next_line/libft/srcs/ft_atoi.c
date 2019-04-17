@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 13:05:29 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/04/17 10:09:17 by vdauverg         ###   ########.fr       */
+/*   Created: 2019/02/13 21:32:05 by vdauverg          #+#    #+#             */
+/*   Updated: 2019/03/05 15:21:59 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/includes/libft.h"
-# define BUFF_SIZE 1
+#include "./../includes/libft.h"
 
-int	get_next_line(const int fd, char **line);
+int	ft_atoi(const char *str)
+{
+	int	num;
+	int	sign;
 
-#endif
+	num = 0;
+	sign = 1;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	while (*str >= 48 && *str <= 57)
+	{
+		num *= 10;
+		num += *str - 48;
+		str++;
+	}
+	return (num * sign);
+}

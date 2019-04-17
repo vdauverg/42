@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 13:05:29 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/04/17 10:09:17 by vdauverg         ###   ########.fr       */
+/*   Created: 2019/02/18 11:45:46 by vdauverg          #+#    #+#             */
+/*   Updated: 2019/03/06 14:15:42 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/includes/libft.h"
-# define BUFF_SIZE 1
+#include "./../includes/libft.h"
 
-int	get_next_line(const int fd, char **line);
+char	*ft_itoa(int n)
+{
+	char	*s;
+	int		i;
+	int		neg;
 
-#endif
+	neg = 0;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	i = ft_numlen(n) + 1;
+	if (!(s = (char *)malloc(sizeof(char) * i)))
+		return (NULL);
+	s[--i] = '\0';
+	if (n < 0)
+	{
+		neg = 1;
+		*s++ = '-';
+		i--;
+		n *= -1;
+	}
+	while (i-- > 0)
+	{
+		s[i] = n % 10 + '0';
+		n /= 10;
+	}
+	return (s - neg);
+}

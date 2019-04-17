@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 13:05:29 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/04/17 10:09:17 by vdauverg         ###   ########.fr       */
+/*   Created: 2019/02/13 00:48:32 by vdauverg          #+#    #+#             */
+/*   Updated: 2019/03/05 15:05:05 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/includes/libft.h"
-# define BUFF_SIZE 1
+#include "./../includes/libft.h"
 
-int	get_next_line(const int fd, char **line);
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	char		*dst2;
+	const char	*src2;
+	size_t		i;
 
-#endif
+	i = -1;
+	dst2 = (char *)dst;
+	src2 = (const char *)src;
+	while (src2 < dst2 && len--)
+		dst2[len] = src2[len];
+	while (src2 > dst2 && ++i < len)
+		dst2[i] = src2[i];
+	return (dst);
+}

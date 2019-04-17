@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_splitcount.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 13:05:29 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/04/17 10:09:17 by vdauverg         ###   ########.fr       */
+/*   Created: 2019/02/24 10:33:43 by vdauverg          #+#    #+#             */
+/*   Updated: 2019/03/02 22:26:09 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/includes/libft.h"
-# define BUFF_SIZE 1
+int	ft_splitcount(const char *s, const char c)
+{
+	int	i;
+	int	count;
 
-int	get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	count = 0;
+	if (s)
+	{
+		while (s[i])
+		{
+			if (s[i] != c && (i == 0 || s[i - 1] == c))
+				count++;
+			i++;
+		}
+		return (count);
+	}
+	return (0);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 20:30:18 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/07/24 16:44:46 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/08/10 13:08:03 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,13 @@ char		*parse_format(const char *format, va_list args)
 	char		*tmp;
 	t_printf	*node;
 
+	str = NULL;
 	i = 0;
 	while (format[i])
 	{
-		node = set_pfnode(node);
-		if (format[i] == '%')
-		{
-			if (!(tmp = check_format(format + i + 1, args, node)))
-				return (NULL);
-			i += node->step + 2;
-		}
+		if ((node = set_pfnode(node)) && format[i] == '%')
+			(tmp = check_format(format + i + 1, args, node)) ? \
+				i += node->step + 2 : 0;
 		else
 		{
 			start = i;

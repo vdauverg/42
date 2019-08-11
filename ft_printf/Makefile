@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+         #
+#    By: vincent <vincent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/30 13:30:38 by vdauverg          #+#    #+#              #
-#    Updated: 2019/07/19 14:20:32 by vdauverg         ###   ########.fr        #
+#    Updated: 2019/08/10 12:50:28 by vincent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OFILES = ft_printf.o flag_handlers.o specifier_handlers.o helpers.o
 
 OBJS = objs
 
-FLAGS = -Wall -Werror -Wextra -I ft_printf.h -I libft/libft.h -c
+FLAGS = -Wall -Werror -Wextra -I ft_printf.h -I libft/libft.h -c -g
 
 
 all: $(NAME)

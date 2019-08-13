@@ -6,7 +6,7 @@
 /*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 09:15:54 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/10 11:43:59 by vincent          ###   ########.fr       */
+/*   Updated: 2019/08/12 00:40:34 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,11 @@ t_line	*lst_fill(t_line *node, char *line)
 		colour = ft_strsplit(data[i], ',');
 		if (*(colour + 1))
 			node->colour[i] = ft_atoibase(colour[1] + 2, 16);
+		else
+			node->colour[i] = -1;
 		node->xz[i] = ft_atoi(*colour);
 		i++;
 	}
-	return (node);
-}
-
-t_line	*lst_addline(t_line *node, char *line, int y)
-{
-	node = (t_line *)malloc(sizeof(t_line));
-	node = lst_fill(node, line);
-	node = node->next;
 	return (node);
 }
 
@@ -57,7 +51,20 @@ t_line	*parse_map(char *file)
 	y = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		node = lst_addline((!y) ? mat : node, line, y);
+		if (!y)
+		{
+			mat = (t_line *)malloc(sizeof(t_line));
+			mat = lst_fill(mat, line);
+			node = (t_line *)malloc(sizeof(t_line));
+			mat->next = node;
+		}
+		else
+		{
+			node = lst_fill(node, line);
+			node->next = (t_line *)malloc(sizeof(t_line));
+			node = node->next;
+		}
+		free(line);
 		y++;
 	}
 	node = NULL;

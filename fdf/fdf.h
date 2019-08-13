@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 10:50:12 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/10 10:55:06 by vincent          ###   ########.fr       */
+/*   Updated: 2019/08/10 21:35:54 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ typedef struct	s_line
 }				t_line;
 
 t_line			*parse_map(char *file);
+int				draw_image(void *mlx_ptr, void *win_ptr, void *img_ptr, int w, int diff);
 # endif

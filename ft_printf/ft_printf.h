@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:25:33 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/07/24 17:17:18 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/08/11 19:18:08 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define S_HANDLE2 {spec_prec,spec_alt,spec_zpad,spec_left,spec_sign,S_HANDLE3
 # define S_HANDLE3 spec_space,spec_h,spec_l,spec_capl,spec_j,spec_z}
 
-typedef struct	s_printf
+typedef struct		s_printf
 {
 	int	l;
 	int	h;
@@ -35,7 +35,7 @@ typedef struct	s_printf
 	int	sign;
 	int	space;
 	int	pad;
-}				t_printf;
+}					t_printf;
 
 int					ft_printf(const char *restrict format, ...);
 char				*check_format(const char *format, va_list args, \
@@ -79,6 +79,7 @@ char				*spec_z(const char *format, va_list args, \
 char				*spec_star(const char *format, va_list args, \
 						t_printf *node);
 char				*ft_itoabase(unsigned long long num, int base, int upper);
+unsigned long long	ft_exponent(unsigned long long num, int exp);
 char				*ft_ftoa(long double num, int precision, int alt);
 char				*ftoa_precmod(int precision, long double num);
 char				*ft_strscat(char *dst, char *src, int start);

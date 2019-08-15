@@ -6,7 +6,7 @@
 /*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 09:15:54 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/12 00:40:34 by vincent          ###   ########.fr       */
+/*   Updated: 2019/08/14 18:36:18 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,23 @@ t_line	*parse_map(char *file)
 		{
 			mat = (t_line *)malloc(sizeof(t_line));
 			mat = lst_fill(mat, line);
+			mat->max_w = mat->length;
 			node = (t_line *)malloc(sizeof(t_line));
 			mat->next = node;
+			node = mat;
 		}
 		else
 		{
+			node = node->next;
 			node = lst_fill(node, line);
 			node->next = (t_line *)malloc(sizeof(t_line));
-			node = node->next;
+			if (node->length > mat->max_w)
+				mat->max_w = node->length;
 		}
 		free(line);
 		y++;
 	}
+	mat->max_h = y;
 	node = NULL;
 	return (mat);
 }

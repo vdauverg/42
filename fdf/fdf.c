@@ -6,7 +6,7 @@
 /*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 09:15:58 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/14 20:08:19 by vincent          ###   ########.fr       */
+/*   Updated: 2019/08/25 18:35:18 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,24 @@ t_image	mat_to_img(void *mlx_ptr, void *win_ptr, t_line *mat, t_image img)
 		w_unit = (double)(img.w / mat->max_h);
 	tot_len = img.w * img.w * img.coldep;
 	i = 0;
-	pos = 0;
+	pos = 0.0;
 	while (i < tot_len)
 	{
-		if (i / img.coldep == (pos < (int)pos + 0.5) ? (int)pos : (int)pos + 1)
+		if ((i / img.coldep) == ((pos < (int)pos + 0.5) ? (int)pos : (int)pos + 1) && ((((i / img.coldep) / img.w) % (int)w_unit == 1) || !i))
 		{
 			j = 0;
 			pos += w_unit;
-			while (j < 4)
+			while (j < img.coldep)
 			{
-				img.image[i] = mlx_get_color_value(mlx_ptr, mat->colour[i / img.coldep] >> (img.coldep - (4 * j)));
+				img.image[i] = mlx_get_color_value(mlx_ptr, mat->colour[(int)(i / (img.coldep * w_unit)) % mat->max_w] >> j * 8);
 				j++;
 				i++;
 			}
 		}
 		else
 			i += img.coldep;
+		if ((i / img.coldep) % img.w == 0)
+			pos = i / img.coldep;
 	}
 	return (img);
 }
@@ -65,10 +67,9 @@ int main(int argc, char **argv)
 	t_line	*mat;
 	t_image	img;
 
-	if (argc == 2)
+	if (argc == 2 && (mat = parse_map(argv[1])))
 	{
-		width = 500;
-		mat = parse_map(argv[1]);
+		width = 900;
 		mlx_ptr = mlx_init();
 		win_ptr = mlx_new_window(mlx_ptr, width, width, "FDF");
 		img.w = width * 0.9;

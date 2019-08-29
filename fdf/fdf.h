@@ -6,7 +6,7 @@
 /*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 10:50:12 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/14 18:27:45 by vincent          ###   ########.fr       */
+/*   Updated: 2019/08/15 14:57:53 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_image
 	int		coldep;
 	int		w;
 	int		endian;
+	int		def_colour;
 	char	*image;
 	void	*img_ptr;
 }				t_image;

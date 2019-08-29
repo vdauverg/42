@@ -6,7 +6,7 @@
 /*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 09:15:54 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/14 18:36:18 by vincent          ###   ########.fr       */
+/*   Updated: 2019/08/25 18:39:49 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ t_line	*lst_fill(t_line *node, char *line)
 	while (data[i])
 	{
 		colour = ft_strsplit(data[i], ',');
-		if (*(colour + 1))
+		if (colour[1])
 			node->colour[i] = ft_atoibase(colour[1] + 2, 16);
 		else
-			node->colour[i] = -1;
+			node->colour[i] = 0x00FF00;
 		node->xz[i] = ft_atoi(*colour);
 		i++;
 	}
@@ -71,7 +71,7 @@ t_line	*parse_map(char *file)
 		free(line);
 		y++;
 	}
-	mat->max_h = y;
+	(mat) ? mat->max_h = y : 0;
 	node = NULL;
 	return (mat);
 }

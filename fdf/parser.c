@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 09:15:54 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/25 18:39:49 by vincent          ###   ########.fr       */
+/*   Updated: 2019/08/29 21:56:16 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_line	*lst_fill(t_line *node, char *line)
 		if (colour[1])
 			node->colour[i] = ft_atoibase(colour[1] + 2, 16);
 		else
-			node->colour[i] = 0x00FF00;
+			node->colour[i] = 0xFFFFFF;
 		node->xz[i] = ft_atoi(*colour);
 		i++;
 	}

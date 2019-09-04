@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 10:50:12 by vincent           #+#    #+#             */
-/*   Updated: 2019/08/29 20:29:35 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/09/02 22:55:41 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@
 # include "libft/get_next_line.h"
 # include <stdlib.h>
 # include <math.h>
+
+typedef struct	s_coords
+{
+	int	x;
+	int	y;
+	int	pos;
+	int	colour;
+}				t_coords;
+
+typedef struct	s_rot
+{
+	int	s;
+	int	x;
+	int	y;
+	int	z;
+}				t_rot;
 
 typedef struct	s_line
 {
@@ -35,6 +51,7 @@ typedef struct	s_image
 	int		w_unit;
 	char	*image;
 	void	*img_ptr;
+	void	*mlx_ptr;
 }				t_image;
 
 t_line			*parse_map(char *file);

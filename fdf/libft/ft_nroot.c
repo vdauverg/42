@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_nroot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/09 13:05:29 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/09/19 17:19:40 by vdauverg         ###   ########.fr       */
+/*   Created: 2019/09/22 13:54:36 by vdauverg          #+#    #+#             */
+/*   Updated: 2019/09/22 13:56:20 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft.h"
-# define BUFF_SIZE 256
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line);
+int	ft_nroot(unsigned long long num, int n)
+{
+	int					exponent;
+	unsigned long long	res;
 
-#endif
+	exponent = 1;
+	if (num == 1 || !num)
+		return (1);
+	while ((res = ft_exponent(n, exponent)) && res <= num)
+		exponent++;
+	return (exponent);
+}

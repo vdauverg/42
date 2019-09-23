@@ -5,29 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/14 01:10:49 by vdauverg          #+#    #+#              #
-#    Updated: 2019/09/22 19:02:55 by vdauverg         ###   ########.fr        #
+#    Created: 2019/09/18 19:22:17 by vdauverg          #+#    #+#              #
+#    Updated: 2019/09/22 19:02:35 by vdauverg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-C_FILES = *.c
-O_FILES = *.o
-FLAGS = -Wall -Wextra -Werror
+NAME = fdf
 
-all: $(NAME)
+CFILES = fdf.c parser.c points_math.c draw.c key_press.c key_press2.c
 
-$(NAME): $(O_FILES)
-	ar rc $(NAME) $(O_FILES)
-	ranlib $(NAME)
+LIBS = minilibx_macos/libmlx.a -framework OpenGL -framework AppKit libft/libft.a
 
-$(O_FILES): $(C_FILES)
-	gcc $(FLAGS) -c $(C_FILES) -I *.h
+FLAGS = -Wall -Werror -Wextra
+
+all:
+	@make -C libft
+	@make -C minilibx_macos
+	@gcc $(FLAGS) $(CFILES) $(LIBS) -o $(NAME)
 
 clean:
-	rm -rf $(O_FILES)
+	@make clean -C libft
+	@make clean -C minilibx_macos
 
-fclean:	clean
-	rm -f $(NAME)
+fclean:
+	@rm -f $(NAME)
+	@make fclean -C libft
 
 re: fclean all

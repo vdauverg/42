@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 09:15:54 by vincent           #+#    #+#             */
-/*   Updated: 2019/09/03 15:08:45 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/09/22 20:04:47 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,24 @@ t_line	*lst_fill(t_line *node, char *line)
 	char	**colour;
 
 	data = ft_strsplit(line, ' ');
-	i = 0;
-	while (data[i])
-		i++;
-	node->xz = (int *)malloc(sizeof(int) * i);
-	node->colour = (unsigned int *)malloc(sizeof(unsigned int) * i);
-	node->length = i;
-	i = 0;
-	while (data[i])
+	node->length = 0;
+	while (data[node->length])
+		node->length++;
+	node->xz = (int *)malloc(sizeof(int) * node->length);
+	node->colour = (unsigned int *)malloc(sizeof(unsigned int) * node->length);
+	i = -1;
+	while (data[++i])
 	{
 		colour = ft_strsplit(data[i], ',');
-		if (colour[1])
-			node->colour[i] = ft_atoibase(colour[1] + 2, 16);
-		else
-			node->colour[i] = 0x000000;
+		(colour[1]) ? node->colour[i] = ft_atoibase(colour[1] + 2, 16) : \
+				(node->colour[i] = 0xFFFFFF);
 		node->xz[i] = ft_atoi(*colour);
-		i++;
+		free(data[i]);
+		free(colour[0]);
+		free(colour[1]);
+		free(colour);
 	}
+	free(data);
 	return (node);
 }
 
@@ -47,34 +48,23 @@ t_line	*parse_map(char *file)
 	t_line	*mat;
 	t_line	*node;
 
-	fd = open(file, O_RDONLY);
-	y = 0;
-	while (get_next_line(fd, &line) > 0)
-	{
-		if (!y)
-		{
-			mat = (t_line *)malloc(sizeof(t_line));
-			mat = lst_fill(mat, line);
-			mat->max_w = mat->length;
-			node = (t_line *)malloc(sizeof(t_line));
-			mat->next = node;
-			node = mat;
-		}
-		else
-		{
-			node = node->next;
-			node = lst_fill(node, line);
-			node->next = (t_line *)malloc(sizeof(t_line));
-			if (node->length > mat->max_w)
-				mat->max_w = node->length;
-		}
-		free(line);
-		y++;
-	}
-	(mat) ? mat->max_h = y : 0;
+	if ((fd = open(file, O_RDONLY)) < 3)
+		return (NULL);
+	mat = (t_line *)malloc(sizeof(t_line));
 	node = mat;
-	while (--y > 0)
-		node = node->next;
+	y = -1;
+	while ((++y || 1) && get_next_line(fd, &line) > 0)
+	{
+		(y) ? node->next = (t_line *)malloc(sizeof(t_line)) : 0;
+		(y) ? node = node->next : 0;
+		node = lst_fill(node, line);
+		(!y) ? mat->max_w = mat->length : 0;
+		(node->length > mat->max_w) ? mat->max_w = node->length : 0;
+		free(line);
+	}
+	free(line);
+	close(fd);
 	node->next = NULL;
+	(mat) ? mat->max_h = y : 0;
 	return (mat);
 }

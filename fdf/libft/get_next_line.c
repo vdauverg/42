@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 20:09:37 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/07/03 17:05:11 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:23:22 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,14 @@ int		get_next_line(const int fd, char **line)
 	check = 0;
 	ft_strclr(buff);
 	(fdlist[fd] && *fdlist[fd] && (check = 1) &&
-		(*line = ft_strjoin(fdlist[fd], *line))) ? ft_strdel(&(fdlist[fd])) : 0;
+		(*line = ft_strjoinfreeall(fdlist[fd], *line)) && 
+		(fdlist[fd] = NULL));
 	if (!ft_strchr(*line, '\n'))
-	{
 		while (!ft_strchr(buff, '\n')
 				&& (isread = read(fd, buff, BUFF_SIZE)) > 0
 				&& !(buff[isread] = '\0')
 				&& (*line = ft_strjoinfreefirst(*line, buff)))
 			check = 1;
-	}
 	tmp = ft_strchr(*line, '\n');
 	(tmp && *tmp && !(*tmp = '\0') && tmp++) ?
 		fdlist[fd] = ft_strdup(tmp) : 0;

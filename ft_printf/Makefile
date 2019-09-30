@@ -6,7 +6,7 @@
 #    By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/30 13:30:38 by vdauverg          #+#    #+#              #
-#    Updated: 2019/08/12 11:02:32 by vdauverg         ###   ########.fr        #
+#    Updated: 2019/09/18 19:28:00 by vdauverg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,7 @@ CFILES = ft_printf.c flag_handlers.c padding_handlers.c helpers.c \
 			diouxx_handlers.c ft_ftoa.c ft_itoabase.c conversion_handlers.c \
 			conversions.c modifier_handlers.c
 
-OFILES = ft_printf.o flag_handlers.o padding_handlers.o helpers.o \
-			diouxx_handlers.o ft_ftoa.o ft_itoabase.o conversion_handlers.o \
-			conversions.o modifier_handlers.o
-
-OBJS = objs
+OFILES = $(CFILES:.c=.o)
 
 FLAGS = -Wall -Werror -Wextra -c
 

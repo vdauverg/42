@@ -6,7 +6,7 @@
 #    By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/18 19:22:17 by vdauverg          #+#    #+#              #
-#    Updated: 2019/09/22 19:02:35 by vdauverg         ###   ########.fr        #
+#    Updated: 2019/09/23 20:31:42 by vdauverg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FLAGS = -Wall -Werror -Wextra
 
 all:
 	@make -C libft
-	@make -C minilibx_macos
+	@make -sC minilibx_macos
 	@gcc $(FLAGS) $(CFILES) $(LIBS) -o $(NAME)
 
 clean:

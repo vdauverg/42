@@ -1,0 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    23                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/03 09:49:23 by vdauverg          #+#    #+#              #
+#    Updated: 2019/10/03 09:54:36 by vdauverg         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#Graphic:
+#Log out using the power button in the top right corner ofthe screen.
+#Then log back in as the new user at the login screen.
+
+#CLI:
+#Run command: exit.
+#Run command: ssh <username>@<host>.
+#<username> being the new user.

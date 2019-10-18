@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vincent <vincent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:03:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/14 21:01:28 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/10/18 00:17:26 by vincent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ void	checker(int count, char **args)
 	a = init_stack(args, count, &lasta);
 	b = NULL;
 	lastb = NULL;
-	swap_one(&a);
-	push(&a, &b, &lastb);
-	push(&a, &b, &lastb);
-	push(&a, &b, &lastb);
-	rot_all(&a, &b);
-	rev_rot_all(&a, &b);
-	swap_one(&a);
-	push(&b, &a, &lasta);
-	push(&b, &a, &lasta);
-	push(&b, &a, &lasta);
+	swap_one(&a, &lasta);
+	push(&a, &b, &lasta, &lastb);
+	push(&a, &b, &lasta, &lastb);
+	push(&a, &b, &lasta, &lastb);
+	push(&a, &b, &lasta, &lastb);
+	swap_one(&a, &lasta);
+	push(&b, &a, &lastb, &lasta);
+	push(&b, &a, &lastb, &lasta);
+	push(&b, &a, &lastb, &lasta);
+	push(&b, &a, &lastb, &lasta);
+	rot_all(&a, &b, &lasta, &lastb);
+	// rev_rot_all(&a, &b, &lasta, &lastb);
 	while (i < count)
 	{
 		ft_putnbr(a->val);

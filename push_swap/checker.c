@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:03:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/14 21:01:28 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/10/15 18:27:48 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	checker(int count, char **args)
 	a = init_stack(args, count, &lasta);
 	b = NULL;
 	lastb = NULL;
-	swap_one(&a);
+	// swap_one(&a);
 	push(&a, &b, &lastb);
 	push(&a, &b, &lastb);
 	push(&a, &b, &lastb);
-	rot_all(&a, &b);
-	rev_rot_all(&a, &b);
-	swap_one(&a);
+	// rot_all(&a, &b);
+	// rev_rot_all(&a, &b);
+	// swap_one(&a);
 	push(&b, &a, &lasta);
 	push(&b, &a, &lasta);
 	push(&b, &a, &lasta);

@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 17:01:54 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/16 23:36:22 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/10/20 15:49:04 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,31 @@ int		chk_strs(int count, char **args)
 	return (count);
 }
 
-int		chk_flags(int count, char **args)
+int		chk_flags(int count, char ***args, t_metadata *meta)
 {
-	int		i;
-	int		j;
-	char	flags[] = "pqrs";
+	int			i;
+	int			j;
+	char		*flags;
 
+	flags = ft_strdup("pqrs");
 	i = 0;
 	while (i < count)
 	{
-		if (*args[i] == '-')
+		if (*(*args)[i] == '-')
 		{
-			args[i]++;
+			(*args)[i]++;
 			j = 0;
-			while (*args[i] && flags[j])
+			while (*(*args)[i] && flags[j])
 			{
-				if (flags[j] == *args[i])
+				if (flags[j] == *(*args)[i])
 				{
-					// Put flags in a struct
+					meta->flags[j] = 1;
 					break ;
 				}
 				j++;
 			}
 		}
+		i++;
 	}
 	return (count);
 }
@@ -58,8 +60,8 @@ int		chk_flags(int count, char **args)
 void	*disp_tab(char *arg)
 {
 	int		i;
-	char	*commands[] = {"md5", "sha256", "whirlpool"};
-	char	*(*funcs[])() = {md5, sha256, whirlpool};
+	char	*commands[] = {"md5", "sha256", "sha512"};
+	char	*(*funcs[])(char *str, t_metadata meta) = {md5, sha256, sha512};
 
 	i = 0;
 	while (commands[i])
@@ -71,28 +73,47 @@ void	*disp_tab(char *arg)
 	return (NULL);
 }
 
-void	*chk_args(int count, char **args)
+void	*chk_args(int *count, char ***args, t_metadata *meta)
 {
-	void	*func;
+	int			c;
+	char		**a;
+	void		*func;
 
-	func = disp_tab(*args);
+	c = *count;
+	a = *args;
+	func = disp_tab(*a);
 	if (!func)
-		safe_exit(*args);
-	args++;
-	if (--count)
-		count = chk_flags(count, args);
-	if (count)
-		count = chk_strs(count, args);
+		safe_exit(*a);
+	a++;
+	if (--c)
+		c = chk_flags(c, &a, meta);
+	if (c)
+		chk_strs(c, a);
+	*count = c;
+	*args = a;
 	return (func);
 }
 
 int		main(int argc, char **argv)
 {
-	void	*func;
+	int			i;
+	char		*res;
+	char		**strs;
+	char		*(*func)(char *, t_metadata);
+	t_metadata	meta;
 
 	if (argc > 2)
 	{
-		func = chk_args(argc--, argv++);
+		argc--;
+		argv++;
+		func = chk_args(&argc, &argv, &meta);
+		strs = read_files(argc, argv);
+		i = 0;
+		while (i < argc)
+		{
+			res = func(strs[i], meta);
+			i++;
+		}
 	}
 	else
 		ft_putstr("usage: ft_ssl command [command opts] [command args]");

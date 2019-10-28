@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 18:21:38 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/20 17:28:51 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:06:37 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ char	*read_file(char *file)
 
 	fd = open(file, O_RDONLY);
 	str = NULL;
-	while (get_next_line(fd, &line) > 0)
-	{
-		line = ft_strjoinfreefirst(line, "\n");
-		if (str)
-			str = ft_strjoinfreefirst(str, line);
-		else
-			str = ft_strdup(line);
-		free(line);
-	}
-	str[ft_strlen(str) - 1] = 0;
+	// while (get_next_line(fd, &line) > 0)
+	// {
+	// 	line = ft_strjoinfreefirst(line, "\n");
+	// 	if (str)
+	// 		str = ft_strjoinfreefirst(str, line);
+	// 	else
+	// 		str = ft_strdup(line);
+	// 	free(line);
+	// }
+	// str[ft_strlen(str) - 1] = 0;
+	str = ft_strdup("pickle rick");
 	return (str);
 }
 

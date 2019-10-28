@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 17:01:54 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/20 15:49:04 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/10/23 14:04:20 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,10 @@
 
 void	safe_exit(char *arg)
 {
-	ft_printf("ft_ssl: Error: '%s' is an invalid command.\n\nStandard \
-			commands:\n\nMessage Digest commands:\nmd5\nsha256\n\nCipher \
-			commands:\n\n", arg);
+	ft_printf("ft_ssl: Error: '%s' is an invalid command.\n\n\
+Standard commands:\n\nMessage Digest commands:\nmd5\nsha256\nsha512\n\n\
+Cipher commands:\n\n", arg);
 	exit(0);
-}
-
-int		chk_strs(int count, char **args)
-{
-	int	i;
-
-	i = 0;
-	return (count);
 }
 
 int		chk_flags(int count, char ***args, t_metadata *meta)
@@ -59,9 +51,9 @@ int		chk_flags(int count, char ***args, t_metadata *meta)
 
 void	*disp_tab(char *arg)
 {
-	int		i;
-	char	*commands[] = {"md5", "sha256", "sha512"};
-	char	*(*funcs[])(char *str, t_metadata meta) = {md5, sha256, sha512};
+	int				i;
+	char			*commands[] = {"md5", "sha256", "sha512", NULL};
+	unsigned char	*(*funcs[])(char *str, t_metadata meta) = {md5, sha256, sha512};
 
 	i = 0;
 	while (commands[i])
@@ -87,8 +79,6 @@ void	*chk_args(int *count, char ***args, t_metadata *meta)
 	a++;
 	if (--c)
 		c = chk_flags(c, &a, meta);
-	if (c)
-		chk_strs(c, a);
 	*count = c;
 	*args = a;
 	return (func);
@@ -96,11 +86,12 @@ void	*chk_args(int *count, char ***args, t_metadata *meta)
 
 int		main(int argc, char **argv)
 {
-	int			i;
-	char		*res;
-	char		**strs;
-	char		*(*func)(char *, t_metadata);
-	t_metadata	meta;
+	int				i;
+	int				j;
+	unsigned char	*res;
+	char			**strs;
+	unsigned char	*(*func)(char *, t_metadata);
+	t_metadata		meta;
 
 	if (argc > 2)
 	{
@@ -112,6 +103,9 @@ int		main(int argc, char **argv)
 		while (i < argc)
 		{
 			res = func(strs[i], meta);
+			j = 0;
+			while (res[j])
+				ft_printf("%02x", res[j++]);
 			i++;
 		}
 	}

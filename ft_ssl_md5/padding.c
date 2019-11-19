@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 14:40:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/23 09:48:51 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/10/29 11:45:46 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,3 @@ int			pad_bits(char **str)
 	*str = pad;
 	return (bits / 512);
 }
-
-// int			pad_bits(char **str)
-// {
-// 	uint64_t	bits;
-// 	int			i;
-// 	int			diff;
-// 	char		c;
-// 	char		*pad;
-
-// 	pad = NULL;
-// 	c = (char)128;
-// 	bits = count_bits(*str) + 8;
-// 	*str = ft_strjoinfreefirst(*str, &c);
-// 	diff = 448 - bits % 512;
-// 	if (diff < 0)
-// 		diff += 512;
-// 	if (diff)
-// 	{
-// 		pad = ft_strnew(diff / 8);
-// 		*str = ft_strjoinfreeall(*str, pad);
-// 	}
-// 	bits += diff + 64;
-// 	pad = ft_strnew(8);
-// 	i = -1;
-// 	while (++i < 8)
-// 		pad[7 - i] = bits >> (i * 8);
-// 	*str = ft_strjoinfreeall(*str, pad);
-// 	return (bits);
-// }

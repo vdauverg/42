@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 17:05:03 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/23 05:55:07 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/11/16 18:29:42 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 # define FT_SSL_H
 # include "libft/libft.h"
 
-# define A (uint32_t)0x01234567
-# define B (uint32_t)0x89abcdef
-# define C (uint32_t)0xfedcba98
-# define D (uint32_t)0x76543210
+# define USAGE 0
+# define INV_COM 1
+# define ILL_OPT 2
 
-# define F(X, Y, Z) (((X) & (Y)) | ((!X) & (Z)))
-# define G(X, Y, Z) (((X) & (Y)) | ((Y) & (!Z)))
-# define H(X, Y, Z) ((X) ^ (Y) ^ (Z))
-# define I(X, Y, Z) ((Y) ^ ((X) | (!Z)))
+# define A (uint32_t)0x67452301
+# define B (uint32_t)0xefcdab89
+# define C (uint32_t)0x98badcfe
+# define D (uint32_t)0x10325476
+
+# define F(X, Y, Z) ((X & Y) | ((!X) & Z))
+# define G(X, Y, Z) ((X & Y) | (Y & (!Z)))
+# define H(X, Y, Z) (X ^ Y ^ Z)
+# define I(X, Y, Z) (Y ^ (X | (!Z)))
 
 static const uint32_t	g_k[64] = {
 	0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee, \
@@ -52,12 +56,15 @@ static const uint32_t	g_s[64] = {
 
 typedef struct			s_metadata
 {
-	int	flags[4];
+	int		chk;
+	int		flags[4];
+	char	*str;
+	char	*sum;
 }						t_metadata;
 
 
-char					**read_files(int count, char **files);
 char					*read_file(char *file);
+uint32_t				*to_uint32(char str);
 int						pad_bits(char **str);
 unsigned char			*md5(char *str, t_metadata meta);
 unsigned char			*sha256(char *str, t_metadata meta);

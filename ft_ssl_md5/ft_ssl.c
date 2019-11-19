@@ -6,47 +6,71 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 17:01:54 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/10/23 14:04:20 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/11/17 16:17:43 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-void	safe_exit(char *arg)
+void	safe_exit(int err, char *arg)
 {
-	ft_printf("ft_ssl: Error: '%s' is an invalid command.\n\n\
+	if (err == USAGE)
+		ft_printf("usage: ft_ssl command [command opts] [command args]");
+	else if (err == INV_COM)
+		ft_printf("ft_ssl: Error: '%s' is an invalid command.\n\n\
 Standard commands:\n\nMessage Digest commands:\nmd5\nsha256\nsha512\n\n\
 Cipher commands:\n\n", arg);
+	else if (err == ILL_OPT)
+		ft_printf("md5: illegal option -- %.1s", arg);
 	exit(0);
 }
 
-int		chk_flags(int count, char ***args, t_metadata *meta)
+void	s_handler(char **arg, t_metadata *meta)
+{
+	int		i;
+	char	*str;
+
+	if (arg[0][2])
+		str = ft_strdup(arg[0] + 2);
+	else
+		str = ft_strdup(arg[1]);
+	meta->str = str;
+}
+
+int		chk_flag(char *arg, t_metadata *meta)
 {
 	int			i;
 	int			j;
+	int			chk;
 	char		*flags;
 
-	flags = ft_strdup("pqrs");
-	i = 0;
-	while (i < count)
+	chk = 0;
+	meta->flags[3] = 0;
+	if (arg[0] == '-' && (flags = ft_strdup("pqrs")))
 	{
-		if (*(*args)[i] == '-')
+		i = 1;
+		if (!(meta->chk) && arg[1] == 's')
+			return (2);
+		while (arg[i])
 		{
-			(*args)[i]++;
+			chk = 0;
 			j = 0;
-			while (*(*args)[i] && flags[j])
+			while (flags[j])
 			{
-				if (flags[j] == *(*args)[i])
+				if (flags[j] == arg[i])
 				{
+					chk = 1;
 					meta->flags[j] = 1;
 					break ;
 				}
 				j++;
 			}
+			if (!chk)
+				safe_exit(ILL_OPT, arg + i);
+			i++;
 		}
-		i++;
 	}
-	return (count);
+	return (chk);
 }
 
 void	*disp_tab(char *arg)
@@ -62,26 +86,8 @@ void	*disp_tab(char *arg)
 			return (funcs[i]);
 		i++;
 	}
+	safe_exit(INV_COM, arg);
 	return (NULL);
-}
-
-void	*chk_args(int *count, char ***args, t_metadata *meta)
-{
-	int			c;
-	char		**a;
-	void		*func;
-
-	c = *count;
-	a = *args;
-	func = disp_tab(*a);
-	if (!func)
-		safe_exit(*a);
-	a++;
-	if (--c)
-		c = chk_flags(c, &a, meta);
-	*count = c;
-	*args = a;
-	return (func);
 }
 
 int		main(int argc, char **argv)
@@ -89,7 +95,7 @@ int		main(int argc, char **argv)
 	int				i;
 	int				j;
 	unsigned char	*res;
-	char			**strs;
+	char			*str;
 	unsigned char	*(*func)(char *, t_metadata);
 	t_metadata		meta;
 
@@ -97,19 +103,29 @@ int		main(int argc, char **argv)
 	{
 		argc--;
 		argv++;
-		func = chk_args(&argc, &argv, &meta);
-		strs = read_files(argc, argv);
-		i = 0;
+		func = disp_tab(*argv);
+		meta.chk = 0;
+		i = 1;
 		while (i < argc)
 		{
-			res = func(strs[i], meta);
-			j = 0;
-			while (res[j])
-				ft_printf("%02x", res[j++]);
+			while (argv[i] && (j = chk_flag(argv[i], &meta)))
+			{
+				if (j == 2)
+					s_handler(argv + i, &meta);
+				i += 1 + meta.flags[3];
+			}
+			if (!argv[i])
+				safe_exit(USAGE, NULL);
+			str = read_file(argv[i]);
+			// res = func(strs[i], meta);
+			// j = 0;
+			// while (j < 16)
+			// 	ft_printf("%02x", res[j++]);
+			ft_printf("%s\n", str);
 			i++;
 		}
 	}
 	else
-		ft_putstr("usage: ft_ssl command [command opts] [command args]");
+		safe_exit(USAGE, NULL);
 	return (0);
 }

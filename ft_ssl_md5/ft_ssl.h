@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 17:05:03 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/11/16 18:29:42 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/11/25 22:00:26 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_SSL_H
 # include "libft/libft.h"
 
+# define INV_FIL -1
 # define USAGE 0
 # define INV_COM 1
 # define ILL_OPT 2
@@ -58,11 +59,11 @@ typedef struct			s_metadata
 {
 	int		chk;
 	int		flags[4];
-	char	*str;
 	char	*sum;
 }						t_metadata;
 
 
+void					safe_exit(int err, char *arg);
 char					*read_file(char *file);
 uint32_t				*to_uint32(char str);
 int						pad_bits(char **str);

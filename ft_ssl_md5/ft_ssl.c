@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 17:01:54 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/11/17 16:17:43 by vdauverg         ###   ########.fr       */
+/*   Updated: 2020/01/01 14:45:57 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	safe_exit(int err, char *arg)
 {
+	if (err == INV_FIL)
+		ft_printf("ft_ssl: %s: No such file or directory", arg);
 	if (err == USAGE)
+	{
 		ft_printf("usage: ft_ssl command [command opts] [command args]");
+		exit(0);
+	}
 	else if (err == INV_COM)
 		ft_printf("ft_ssl: Error: '%s' is an invalid command.\n\n\
 Standard commands:\n\nMessage Digest commands:\nmd5\nsha256\nsha512\n\n\
 Cipher commands:\n\n", arg);
 	else if (err == ILL_OPT)
-		ft_printf("md5: illegal option -- %.1s", arg);
-	exit(0);
+		ft_printf("ft_ssl: illegal option -- %.1s", arg);
 }
 
 void	s_handler(char **arg, t_metadata *meta)
@@ -32,9 +36,11 @@ void	s_handler(char **arg, t_metadata *meta)
 
 	if (arg[0][2])
 		str = ft_strdup(arg[0] + 2);
-	else
+	else if (arg[1])
 		str = ft_strdup(arg[1]);
-	meta->str = str;
+	else
+		str = read_file(NULL);
+	ft_printf("%s\n", str);
 }
 
 int		chk_flag(char *arg, t_metadata *meta)
@@ -48,9 +54,9 @@ int		chk_flag(char *arg, t_metadata *meta)
 	meta->flags[3] = 0;
 	if (arg[0] == '-' && (flags = ft_strdup("pqrs")))
 	{
-		i = 1;
 		if (!(meta->chk) && arg[1] == 's')
 			return (2);
+		i = 1;
 		while (arg[i])
 		{
 			chk = 0;
@@ -73,6 +79,23 @@ int		chk_flag(char *arg, t_metadata *meta)
 	return (chk);
 }
 
+int		chk_flags(char **args, t_metadata *meta)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (args[i] && (j = chk_flag(args[i], meta)))
+	{
+		if (j != 2 && !args[i])
+			safe_exit(USAGE, NULL);
+		if (j == 2)
+			s_handler(args + i, meta);
+		i += 1 + meta->flags[3];
+	}
+	return (i);
+}
+
 void	*disp_tab(char *arg)
 {
 	int				i;
@@ -93,7 +116,6 @@ void	*disp_tab(char *arg)
 int		main(int argc, char **argv)
 {
 	int				i;
-	int				j;
 	unsigned char	*res;
 	char			*str;
 	unsigned char	*(*func)(char *, t_metadata);
@@ -105,17 +127,9 @@ int		main(int argc, char **argv)
 		argv++;
 		func = disp_tab(*argv);
 		meta.chk = 0;
-		i = 1;
+		i = 1 + chk_flags(argv + 1, &meta);
 		while (i < argc)
 		{
-			while (argv[i] && (j = chk_flag(argv[i], &meta)))
-			{
-				if (j == 2)
-					s_handler(argv + i, &meta);
-				i += 1 + meta.flags[3];
-			}
-			if (!argv[i])
-				safe_exit(USAGE, NULL);
 			str = read_file(argv[i]);
 			// res = func(strs[i], meta);
 			// j = 0;

@@ -1,31 +1,44 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/14 01:10:49 by vdauverg          #+#    #+#              #
-#    Updated: 2019/03/06 13:37:52 by vdauverg         ###   ########.fr        #
+#    Updated: 2020/08/24 15:55:04 by vdauverg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-C_FILES = *.c
-O_FILES = *.o
+
+SDIR = ./src
+ODIR = ./objs
+
+_SRCS = *.c
+_OBJS = *.o
+
+SRCS = $(SDIR)/*.c
+OBJS = $(ODIR)/*.o
+
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(O_FILES)
-	ar rc $(NAME) $(O_FILES)
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-$(O_FILES): $(C_FILES)
-	gcc $(FLAGS) -c $(C_FILES) -I *.h
+$(OBJS): $(ODIR) $(SRCS)
+	gcc $(FLAGS) -c $(SRCS) -I *.h
+	mv $(_OBJS) $(ODIR)
+
+$(ODIR):
+	mkdir $(ODIR)
 
 clean:
-	rm -rf $(O_FILES)
+	rm -rf $(OBJS)
+	rm -rf $(ODIR)
 
 fclean:	clean
 	rm -f $(NAME)

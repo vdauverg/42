@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 14:18:05 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/03/05 19:17:34 by vdauverg         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:27:26 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ int				ft_splitcount(const char *s, const char c);
 char			*ft_strndup(const char *s1, size_t n);
 size_t			ft_strnlen(const char *s, size_t maxlen);
 int				ft_sublen(const char *s, const char c);
+int				ft_iswhitespace(char c);
+char			*ft_whitespaceend(char *str);
 
 #endif

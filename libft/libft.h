@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 14:18:05 by vdauverg          #+#    #+#             */
-/*   Updated: 2020/08/24 15:27:26 by vdauverg         ###   ########.fr       */
+/*   Updated: 2020/08/26 18:25:42 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ size_t			ft_strnlen(const char *s, size_t maxlen);
 int				ft_sublen(const char *s, const char c);
 int				ft_iswhitespace(char c);
 char			*ft_whitespaceend(char *str);
+void			ft_outputstr(char *s);
 
 #endif

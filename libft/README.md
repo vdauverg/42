@@ -7,3 +7,4 @@ ft_strndup.c - copycat of strndup internal function.
 ft_numlen.c - counts number of characters in an int.
 ft_iswhitespace - checks whether a character is any of: " ", "\t", "\r", "\n", "\v", "\f".
 ft_whitespaceend - returns a pointer to the character after the end of whitespace in the given string.
+ft_outputstr - faster version of ft_putstr. Only uses one write call.
